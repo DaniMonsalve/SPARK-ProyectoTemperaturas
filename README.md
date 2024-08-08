@@ -107,3 +107,5 @@ Este archivo es útil para confirmar que los archivos de recursos están correct
 3. **Resultados:**
    - El programa procesará los archivos CSV de temperaturas y estaciones, calculará las temperaturas promedio anuales y las presentará en la consola en forma de DataFrame ordenado por latitud y longitud.
 
+El dataframe resultante se visualiza por pantalla de la siguiente manera:
+<img width="494" alt="2024-08-08 17_32_14-Temperaturas" src="https://github.com/user-attachments/assets/66dbfbd3-1fb4-4a5e-b653-8d2d5da1176a">
