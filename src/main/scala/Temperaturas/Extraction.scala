@@ -142,7 +142,7 @@ object Extraction {
   def main(args: Array[String]): Unit = {
     val stationsFile = "/stations.csv"
     val startYear = 1975
-    val endYear = 1976
+    val endYear = 2015
     val temperatureFiles = (startYear to endYear).map(year => s"/$year.csv")
 
     try {
