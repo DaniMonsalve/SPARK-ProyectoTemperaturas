@@ -1,3 +1,4 @@
+
 # Proyecto Análisis de Temperaturas Históricas
 
 Este proyecto utiliza Apache Spark para procesar y analizar datos históricos de temperaturas. Con este proyecto, puedes calcular la temperatura media anual por ubicación a partir de archivos de datos que contienen información de estaciones meteorológicas y lecturas de temperatura.
@@ -107,3 +108,12 @@ Este archivo es útil para confirmar que los archivos de recursos están correct
 3. **Resultados:**
    - El programa procesará los archivos CSV de temperaturas y estaciones, calculará las temperaturas promedio anuales y las guardará en formato CSV en la carpeta `output`.
    - La salida estará ordenada por latitud y longitud y mostrará las primeras 10 filas del DataFrame en la consola para verificar que los datos se están procesando correctamente.
+
+    **Ejemplo-Resultados:**
+
+     Tomando un ejemplo en el que se calcula las tamperaturas promedio para los años 1975 y 1976, el dataframe resultante se visualiza por pantalla de la siguiente manera:
+
+
+
+  <img width="494" alt="2024-08-08 17_32_14-Temperaturas" src="https://github.com/user-attachments/assets/66dbfbd3-1fb4-4a5e-b653-8d2d5da1176a">
+>>>>>>> ccc557a471033f5f03a8edac975f2d403a5ed349
