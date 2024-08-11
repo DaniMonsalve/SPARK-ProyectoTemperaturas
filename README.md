@@ -7,10 +7,9 @@ Este proyecto utiliza Apache Spark para procesar y analizar datos históricos de
 1. [Descripción](#descripción)
 2. [Estructura del Proyecto](#estructura-del-proyecto)
 3. [Requisitos](#requisitos)
-4. [Resumen del Código `Extraction.scala`](#resumen-del-código-extractionscala)
-5. [Resumen del Código `ResourceTest.scala`](#resumen-del-código-testscala)
+4. [Resumen del Código `Extraccion.scala`](#resumen-del-código-extraccionscala)
+5. [Resumen del Código `TestResource.scala`](#resumen-del-código-testresourcescala)
 6. [Ejecutar el Proyecto y Resultados](#ejecutar-el-proyecto-y-resultados)
-
 
 ## 1. Descripción
 
@@ -42,30 +41,31 @@ El proyecto está organizado en las siguientes carpetas:
 - **SBT**: Para compilar y ejecutar el proyecto.
 - **Java**: Necesario para ejecutar Spark.
 
-## 4. Resumen del Código `Extraction.scala`
+## 4. Resumen del Código `Extraccion.scala`
 
-El archivo `Extraction.scala` contiene la lógica principal del proyecto y se encarga de:
+El archivo `Extraccion.scala` contiene la lógica principal del proyecto y se encarga de:
 
 1. **Configuración Inicial:**
    - Crea una instancia de `SparkSession` para permitir el procesamiento distribuido con Spark.
    - Configura el nivel de registro de Spark para reducir la cantidad de logs mostrados.
 
 2. **Carga de Datos:**
-   - La función `getRDDFromResource` carga archivos CSV desde el sistema de archivos y los convierte en RDD de cadenas de texto (`RDD[String]`).
+   - La función `obtenerRDDDesdeRecurso` carga archivos CSV desde el sistema de archivos y los convierte en RDD de cadenas de texto (`RDD[String]`).
 
 3. **Procesamiento de Datos:**
-   - **`locateTemperatures`:** 
+   - **`localizarTemperaturas`:** 
      - Carga los archivos de estaciones y temperaturas.
      - Filtra datos inválidos y convierte las temperaturas de Fahrenheit a Celsius.
      - Une los datos de estaciones y temperaturas basados en identificadores comunes (STN, WBAN).
-   - **`locationYearlyAverageRecords`:** 
+   - **`promediarTemperaturasAnuales`:** 
      - Agrupa las temperaturas por año y ubicación.
      - Calcula la temperatura promedio anual para cada ubicación.
 
 4. **Visualización:**
    - Convierte el RDD resultante en un DataFrame.
-   - Extrae latitud y longitud del DataFrame y lo ordena por estas coordenadas.
-   - Muestra los resultados ordenados en la consola.
+   - Extrae latitud y longitud del DataFrame y crea nuevas columnas para estas coordenadas.
+   - Ordena el DataFrame por latitud y longitud.
+   - Guarda el DataFrame en disco en formato CSV.
 
 ## 5. Resumen del Código `TestResource.scala`
 
@@ -105,5 +105,5 @@ Este archivo es útil para confirmar que los archivos de recursos están correct
      ```
 
 3. **Resultados:**
-   - El programa procesará los archivos CSV de temperaturas y estaciones, calculará las temperaturas promedio anuales y las presentará en la consola en forma de DataFrame ordenado por latitud y longitud.
-
+   - El programa procesará los archivos CSV de temperaturas y estaciones, calculará las temperaturas promedio anuales y las guardará en formato CSV en la carpeta `output`.
+   - La salida estará ordenada por latitud y longitud y mostrará las primeras 10 filas del DataFrame en la consola para verificar que los datos se están procesando correctamente.

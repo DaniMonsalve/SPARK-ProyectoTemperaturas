@@ -2,7 +2,7 @@ name := "Temperaturas"
 
 version := "0.1"
 
-scalaVersion := "2.12.17"  // Puedes usar "2.13.11" si es necesario, pero asegúrate de que todas las dependencias sean compatibles
+scalaVersion := "2.12.17"  // las dependencias son compatibles
 
 scalacOptions ++= Seq(
   "-feature",
@@ -30,7 +30,8 @@ libraryDependencies ++= Seq(
   
   // Dependencias para Log4j
   "org.apache.logging.log4j" % "log4j-core" % "2.17.2",
-  "org.apache.logging.log4j" % "log4j-api" % "2.17.2"
+  "org.apache.logging.log4j" % "log4j-api" % "2.17.2",
+  "org.apache.logging.log4j" % "log4j-slf4j-impl" % "2.17.2"
 )
 
 resolvers += "Maven Central" at "https://repo1.maven.org/maven2/"
@@ -57,3 +58,18 @@ mainClass in Compile := Some("Temperaturas.Main")
 
 // Incluir las carpetas de recursos en el classpath
 Test / unmanagedResourceDirectories += baseDirectory.value / "src" / "main" / "resources"
+
+// Configuración de opciones de la JVM
+javaOptions ++= Seq(
+  "-XX:+UseG1GC",          // Usa el recolector de basura G1GC para mejorar el rendimiento
+  "-Xmx8G",                // Tamaño máximo de la heap, ajustado para un entorno con 4.9 GB de memoria libre
+  "-Xms2G"                 // Tamaño inicial de la heap, igual que el tamaño máximo para minimizar las reconfiguraciones
+)
+
+// Asegúrate de que `fork` esté habilitado para aplicar `javaOptions`
+/* 
+  Esta configuración asegura que sbt ejecute tu aplicación y pruebas en un proceso separado, permitiendo que las opciones de JVM se apliquen correctamente.
+  Ejecutar el código en un proceso separado en sbt tiene ventajas importantes cuando se trata de gestionar las opciones de la JVM, como la memoria y los recolectores de basura. 
+  */
+Compile / fork := true
+Test / fork := true
